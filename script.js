@@ -52,25 +52,7 @@ function playRound(playerSelection, computerSelection) {
             break;
     }
 
-    console.log(winner);
-
-    let winMessage;
-
-    switch(winner) {
-        case 'player':
-            winMessage = `You Win! ${playerSelection} beats ${computerSelection}!`
-            break;
-        case 'computer':
-            winMessage = `You Lose! ${computerSelection} beats ${playerSelection}!`
-            break;
-        case 'tie':
-            winMessage = `It's a tie! You both picked ${playerSelection}!`;
-            break;
-        default:
-            winMessage = "Error!"
-    }
-
-    return winMessage;
+    return winner;
 }
 
 const playerSelection = "rock";
