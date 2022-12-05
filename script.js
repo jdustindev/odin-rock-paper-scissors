@@ -1,3 +1,7 @@
+let playerScore = 0;
+let computerScore = 0;
+let ties = 0;
+
 function getComputerChoice() {
     const choices = ['Rock', 'Paper', 'Scissors'];
     const choiceNumber = Math.floor(Math.random() * 3);
@@ -13,9 +17,41 @@ const computerDiv = document.createElement('div');
 computerDiv.id = 'computer';
 const winnerDiv = document.createElement('div');
 winnerDiv.id = 'winner';
+const gameWinnerDiv = document.createElement('div');
+gameWinnerDiv.id = 'gameWinner';
 resultsDiv.appendChild(playerDiv);
 resultsDiv.appendChild(computerDiv);
 resultsDiv.appendChild(winnerDiv);
+resultsDiv.appendChild(gameWinnerDiv);
+
+function setScore(winner) {
+    switch (winner) {
+        case 'player':
+            playerScore++;
+            break;
+        case 'computer':
+            computerScore++;
+            break;
+        case 'tie':
+            ties++;
+            break;
+    }
+}
+
+function displayWinner() {
+    if (playerScore + computerScore + ties >= 5) {
+        let gameWinner;
+        if (playerScore > computerScore) {
+            gameWinner = 'Player';
+        } else if (computerScore > playerScore) {
+            gameWinner = 'Computer';
+        } else {
+            gameWinner = 'Tie. No winner';
+        }
+        gameWinnerDiv.textContent = `GAME FINISHED! Player: ${playerScore} -
+            Computer: ${computerScore} - Ties: ${ties} - WINNER: ${gameWinner}!`;
+    }
+}
 
 rpsButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -24,6 +60,8 @@ rpsButtons.forEach((button) => {
         playerDiv.textContent = `Player: ${button.id}`;
         computerDiv.textContent = `Computer: ${computerChoice}`;
         winnerDiv.textContent = `Winner: ${winner}`;
+        setScore(winner);
+        displayWinner();
     });
 });
 
