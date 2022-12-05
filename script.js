@@ -4,9 +4,19 @@ function getComputerChoice() {
     return choices[choiceNumber];
 }
 
+const rpsButtons = document.querySelectorAll(".rps-button");
+rpsButtons.forEach((button) => {
+    console.log(button.id);
+    button.addEventListener('click', () => {
+        console.log(playRound(button.id, getComputerChoice()));
+    });
+});
+
 function playRound(playerSelection, computerSelection) {
     // compare strings (lowercased) to determine winner (Rock > Scissors > Paper > Rock)
     let winner = null;
+
+    console.log(playerSelection, computerSelection);
 
     switch (playerSelection.toLowerCase()) {
         case 'rock':
