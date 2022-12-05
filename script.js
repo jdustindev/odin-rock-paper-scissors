@@ -5,10 +5,25 @@ function getComputerChoice() {
 }
 
 const rpsButtons = document.querySelectorAll(".rps-button");
+const resultsDiv = document.querySelector('#results');
+resultsDiv.id = 'results';
+const playerDiv = document.createElement('div');
+playerDiv.id = 'player';
+const computerDiv = document.createElement('div');
+computerDiv.id = 'computer';
+const winnerDiv = document.createElement('div');
+winnerDiv.id = 'winner';
+resultsDiv.appendChild(playerDiv);
+resultsDiv.appendChild(computerDiv);
+resultsDiv.appendChild(winnerDiv);
+
 rpsButtons.forEach((button) => {
-    console.log(button.id);
     button.addEventListener('click', () => {
-        console.log(playRound(button.id, getComputerChoice()));
+        const computerChoice = getComputerChoice();
+        const winner = playRound(button.id, computerChoice);
+        playerDiv.textContent = `Player: ${button.id}`;
+        computerDiv.textContent = `Computer: ${computerChoice}`;
+        winnerDiv.textContent = `Winner: ${winner}`;
     });
 });
 
